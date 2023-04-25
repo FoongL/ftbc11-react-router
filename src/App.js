@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/home";
+import AboutMe from "./pages/aboutMe";
+import Error from "./pages/error";
+import Posts from "./pages/posts";
+import Post from "./pages/post";
+import NewPost from "./pages/newPost";
+import PostLayout from "./layouts/postsLayouts";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/aboutme" element={<AboutMe />} />
+        <Route path="/posts" element={<PostLayout/>}>
+          <Route index element={<Posts/>}/>
+          <Route path="new" element={<NewPost />} />
+          <Route path=":id" element={<Post />} />
+        </Route>
+        <Route path="/error" element={<Error />} />
+        <Route path="*" element={<Navigate to='/error' />} />
+      </Routes>
     </div>
   );
 }
